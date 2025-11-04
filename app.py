@@ -1,3 +1,28 @@
+import os
+import requests
+
+def download_file(url, filepath):
+    if not os.path.exists(filepath):
+        print(f"Downloading {filepath} ...")
+        r = requests.get(url, allow_redirects=True)
+        with open(filepath, 'wb') as f:
+            f.write(r.content)
+        print(f"Downloaded {filepath}")
+
+os.makedirs("models", exist_ok=True)
+
+# GFPGAN
+download_file(
+    "https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.4.pth",
+    "models/GFPGANv1.4.pth"
+)
+
+# InSwapper
+download_file(
+    "https://huggingface.co/deepinsight/insightface/resolve/main/models/inswapper_128.onnx",
+    "models/inswapper_128.onnx"
+)
+
 import streamlit as st
 import numpy as np
 import cv2
@@ -12,8 +37,6 @@ import torchvision.transforms.functional as F
 import sys
 import types
 
-import os
-
 assert os.path.exists("/content/inswapper_128.onnx"), "inswapper missing"
 assert os.path.exists("/content/GFPGANv1.4.pth"), "GFPGAN missing"
 
@@ -24,10 +47,10 @@ sys.modules['torchvision.transforms.functional_tensor'].rgb_to_grayscale = F.rgb
 from gfpgan import GFPGANer
 
 # Load models
-swapper = get_model('/content/inswapper_128.onnx', download=False, providers=['CPUExecutionProvider'])
+swapper = get_model('models/inswapper_128.onnx', download=False, providers=['CPUExecutionProvider'])
 app = FaceAnalysis(name="buffalo_l", providers=['CPUExecutionProvider'])
 app.prepare(ctx_id=0, det_size=(640,640))
-restorer = GFPGANer(model_path='/content/GFPGANv1.4.pth', upscale=2, arch='clean', channel_multiplier=2)
+restorer = GFPGANer(model_path='models/GFPGANv1.4.pth', upscale=2, arch='clean', channel_multiplier=2)
 
 st.title("Sprite Face Swapper")
 
