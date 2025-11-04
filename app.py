@@ -27,27 +27,27 @@ download_file(
 import streamlit as st
 import numpy as np
 import cv2
-#import insightface
-#from insightface.app import FaceAnalysis
-#from insightface.model_zoo import get_model
-#import torch
+import insightface
+from insightface.app import FaceAnalysis
+from insightface.model_zoo import get_model
+import torch
 from PIL import Image, ImageDraw, ImageFont
 
-#import torchvision.transforms.functional as F
-#import sys
-#import types
+import torchvision.transforms.functional as F
+import sys
+import types
 
 # Patch: emulate the old module path expected by basicsr
-#sys.modules['torchvision.transforms.functional_tensor'] = types.ModuleType('torchvision.transforms.functional_tensor')
-#sys.modules['torchvision.transforms.functional_tensor'].rgb_to_grayscale = F.rgb_to_grayscale
+sys.modules['torchvision.transforms.functional_tensor'] = types.ModuleType('torchvision.transforms.functional_tensor')
+sys.modules['torchvision.transforms.functional_tensor'].rgb_to_grayscale = F.rgb_to_grayscale
 
-#from gfpgan import GFPGANer
+from gfpgan import GFPGANer
 
 # Load models
-#swapper = get_model('models/inswapper_128.onnx', download=False, providers=['CPUExecutionProvider'])
-#app = FaceAnalysis(name="buffalo_l", providers=['CPUExecutionProvider'])
-#app.prepare(ctx_id=0, det_size=(640,640))
-#restorer = GFPGANer(model_path='models/GFPGANv1.4.pth', upscale=2, arch='clean', channel_multiplier=2)
+swapper = get_model('models/inswapper_128.onnx', download=False, providers=['CPUExecutionProvider'])
+app = FaceAnalysis(name="buffalo_l", providers=['CPUExecutionProvider'])
+app.prepare(ctx_id=0, det_size=(640,640))
+restorer = GFPGANer(model_path='models/GFPGANv1.4.pth', upscale=2, arch='clean', channel_multiplier=2)
 
 st.title("Sprite Personalized Poster Generator")
 st.warning("This demo only accepts user uploaded images of yourself. Do not upload celebrity/public figure photos.")
