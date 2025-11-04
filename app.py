@@ -19,7 +19,7 @@ download_file(
 
 # InSwapper
 download_file(
-    "https://huggingface.co/deepinsight/insightface/resolve/main/models/inswapper_128.onnx",
+    "https://drive.usercontent.google.com/download?id=1krOLgjW2tAPaqV-Bw4YALz0xT5zlb5HF&export=download&authuser=0",
     "models/inswapper_128.onnx"
 )
 
