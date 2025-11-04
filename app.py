@@ -52,7 +52,8 @@ app = FaceAnalysis(name="buffalo_l", providers=['CPUExecutionProvider'])
 app.prepare(ctx_id=0, det_size=(640,640))
 restorer = GFPGANer(model_path='models/GFPGANv1.4.pth', upscale=2, arch='clean', channel_multiplier=2)
 
-st.title("Sprite Face Swapper")
+st.title("Sprite Personalized Poster Generator")
+st.warning("This demo only accepts user uploaded images of yourself. Do not upload celebrity/public figure photos.")
 
 name = st.text_input("Nama")
 place = st.text_input("Nama Warung")
