@@ -46,8 +46,8 @@ from gfpgan import GFPGANer
 # Load models
 restorer = GFPGANer(model_path='models/GFPGANv1.4.pth', upscale=2, arch='clean', channel_multiplier=2)
 #swapper = get_model('models/inswapper_128.onnx', download=False, providers=['CPUExecutionProvider'])
-app = FaceAnalysis(name="buffalo_l", providers=['CPUExecutionProvider'])
-app.prepare(ctx_id=0, det_size=(640,640))
+#app = FaceAnalysis(name="buffalo_l", providers=['CPUExecutionProvider'])
+#app.prepare(ctx_id=0, det_size=(640,640))
 
 st.title("Sprite Personalized Poster Generator")
 st.warning("This demo only accepts user uploaded images of yourself. Do not upload celebrity/public figure photos.")
